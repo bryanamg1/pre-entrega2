@@ -1,33 +1,21 @@
 import { Router } from "express";
-import mongoose from "mongoose";
-import { carsModel } from "../dao/models/cars.model.js";
+import { getAllCars,getCarsById,createCar,deleteAllProducstInCar,deleteOneProductIncar,updateProductInCar,updateQuantityInCar } from "../service/cars.service";
 
 const router = Router();
 
-router.get('/:cid', async(req,res)=>{
-    try{
-        const id = req.params.cid
-        const result = await carsModel.find({_id:id})
-        res.send({status: 'success', payload: result})
-    }catch(error) {
-        res.status(500).send('Error obteniendo productos: ' + error);
-    }
-});
+router.get('/:cid', getCarsById());
 
-router.post('/',async(req,res)=>{
-    const productId = req.body
-    try{
-        const result = await carsModel.find({_id:productId})
-        if(!result){
-            result.quantity=1
-        }else{
-            result.quantity++
-            await carsModel.create(productId,result.quantity)
-        }
-        
-        res.send({ status: 'success', payload:0  });
-    }catch(error) {
-    res.status(500).send('Error obteniendo productos: ' + error);
-}})
+router.get('/', getAllCars())
+
+
+router.post('/', createCar());
+
+router.delete('/:cid',deleteAllProducstInCar());
+
+router.delete('/:cid/products/:pid',deleteOneProductIncar() );
+
+router.put('/:cid/products/:pid', updateQuantityInCar());
+
+router.put('/:cid', updateProductInCar());
 
 export default router

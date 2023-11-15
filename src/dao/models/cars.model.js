@@ -5,15 +5,16 @@ const carsCollection = 'cars'
 const carsSchema = new mongoose.Schema({
     products: [
         {
-            productId:{
+            product:{
                 type:mongoose.Schema.Types.ObjectId,
                 ref: 'products'
             },
             quantity:{
                 type:Number,
-                default: 0
-            }
-        }
+                default: 0}
+        },
+
+        
     ]
 })
 

@@ -12,7 +12,7 @@ app.use('/api/cars', carsRouter);
 app.use('/api/products', productsRouter);
 
 try{
-    await mongoose.connect('');
+    await mongoose.connect('mongodb+srv://bryanamg181:120498Bm@cluster0.kzb6uge.mongodb.net/prueba?retryWrites=true&w=majority');
     console.log('base de datos conectada')
 }catch(error){
     console.log(error)
